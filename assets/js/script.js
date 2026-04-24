@@ -98,36 +98,6 @@
 		window.addEventListener('load', () => setTimeout(init, 150));
 	}
 })();
-// ─── Team AOS (> 1280px only) ────────────────────────────────────────────────
-
-(function () {
-	function applyTeamAOS() {
-		const images = document.querySelectorAll('.team__member-image');
-		const infos = document.querySelectorAll('.team__member-info');
-
-		if (window.innerWidth >= 1280) {
-			images.forEach((el) => {
-				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-duration', '500');
-			});
-			infos.forEach((el) => {
-				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-duration', '500');
-			});
-		} else {
-			[...images, ...infos].forEach((el) => {
-				el.removeAttribute('data-aos');
-				el.removeAttribute('data-aos-delay');
-				el.removeAttribute('data-aos-duration');
-			});
-		}
-
-		AOS.refreshHard();
-	}
-
-	document.addEventListener('DOMContentLoaded', applyTeamAOS);
-	window.addEventListener('resize', applyTeamAOS);
-})();
 
 // ─── AOS Init ─────────────────────────────────────────────────────────────────
 
