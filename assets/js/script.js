@@ -97,13 +97,13 @@
 		if (window.innerWidth >= 1280) {
 			images.forEach((el, i) => {
 				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-delay', String(i * 60));
-				el.setAttribute('data-aos-duration', '600');
+				el.setAttribute('data-aos-delay', String((i % 4) * 80));
+				el.setAttribute('data-aos-duration', '500');
 			});
 			infos.forEach((el, i) => {
 				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-delay', String(i * 60 + 80));
-				el.setAttribute('data-aos-duration', '600');
+				el.setAttribute('data-aos-delay', String((i % 4) * 80 + 60));
+				el.setAttribute('data-aos-duration', '500');
 			});
 		} else {
 			[...images, ...infos].forEach((el) => {
