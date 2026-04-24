@@ -133,9 +133,7 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
     padding: 0;
     border: none;
     background: none;
-    position: fixed;
-    top: 30px;
-    right: 30px;
+    position: relative;
     z-index: 1100;
 }
 
@@ -1265,11 +1263,11 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
 .commitment__sticky {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 500px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 50px 0;
+    padding: 20px 0 30px;
     gap: 25px;
 }
 
@@ -1286,9 +1284,18 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
 
 .commitment__track {
     flex: 1;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 0 50px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.commitment__track::-webkit-scrollbar {
+    display: none;
 }
 
 .commitment__body {
@@ -1296,6 +1303,7 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
     gap: 10px;
     flex-wrap: nowrap;
     will-change: transform;
+    align-items: stretch;
 }
 
 .commitment__item {
@@ -2446,6 +2454,14 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
 
     .commitment__body {
         gap: 20px;
+    }
+
+    .commitment__sticky {
+        height: 80vh;
+    }
+
+    .commitment__track {
+        overflow-x: hidden;
     }
 
     .commitment__item {

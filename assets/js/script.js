@@ -47,17 +47,28 @@
 
 	if (!wrapper || !track || !body) return;
 
+	const MOBILE_BREAKPOINT = 1280;
 	let totalScroll = 0;
 	let wrapperTop = 0;
+	let isMobile = false;
 
 	function setup() {
-		// getBoundingClientRect + scrollY = true document-absolute top (offsetTop breaks with positioned parents)
+		isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+		if (isMobile) {
+			wrapper.style.height = '';
+			body.style.transform = '';
+			return;
+		}
+
 		wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
 		totalScroll = body.scrollWidth - track.clientWidth;
-		wrapper.style.height = (window.innerHeight + totalScroll) + 'px';
+		const sticky = wrapper.querySelector('.commitment__sticky');
+		const stickyHeight = sticky ? sticky.offsetHeight : window.innerHeight;
+		wrapper.style.height = (stickyHeight + totalScroll) + 'px';
 	}
 
 	function onScroll(scrollY) {
+		if (isMobile) return;
 		const scrolled = scrollY - wrapperTop;
 		const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
 		body.style.transform = `translateX(${-progress * totalScroll}px)`;
@@ -95,14 +106,12 @@
 		const infos = document.querySelectorAll('.team__member-info');
 
 		if (window.innerWidth >= 1280) {
-			images.forEach((el, i) => {
+			images.forEach((el) => {
 				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-delay', String((i % 4) * 80));
 				el.setAttribute('data-aos-duration', '500');
 			});
-			infos.forEach((el, i) => {
+			infos.forEach((el) => {
 				el.setAttribute('data-aos', 'fade-up');
-				el.setAttribute('data-aos-delay', String((i % 4) * 80 + 60));
 				el.setAttribute('data-aos-duration', '500');
 			});
 		} else {
@@ -124,9 +133,10 @@
 
 AOS.init({
 	once: true,
-	duration: 700,
+	duration: 600,
 	easing: 'ease-out-cubic',
-	offset: 80,
+	offset: 0,
+	anchorPlacement: 'top-bottom',
 });
 
 // ─── Hero Parallax ───────────────────────────────────────────────────────────
