@@ -2427,7 +2427,7 @@ a:not(.header__logo):not(.footer__logo):not(.hero__cta):not(.info__cta):not(.hea
     }
 
     .commitment {
-        padding: 100px 0 100px 100px;
+        padding: 100px 0 100px 0;
     }
 
     .commitment .container {
