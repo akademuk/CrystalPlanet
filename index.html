@@ -37,6 +37,8 @@
     <script src="assets/libs/swiper/swiper-bundle.min.js" defer></script>
     <script src="assets/libs/aos/aos.js" defer></script>
     <script src="assets/libs/lenis/lenis.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <script src="assets/js/script.js" defer></script>
 </head>
 
@@ -44,9 +46,7 @@
     <header class="header" role="banner">
         <div class="container">
             <a href="#hero-heading" class="header__logo" aria-label="Crystal Planet — go to homepage">
-                <img src="assets/images/logo1.svg" width="115" height="72" alt="Crystal Planet">
-                <img src="assets/images/logo2.svg" width="17" height="17" alt="" aria-hidden="true">
-                <img src="assets/images/logo3.svg" width="116" height="17" alt="" aria-hidden="true">
+                <img src="assets/images/Logos.svg" width="268" height="72" alt="Crystal Planet">
             </a>
             <nav class="header__nav" aria-label="Main navigation">
                 <ul class="nav-list">
@@ -87,8 +87,8 @@
             <div class="container">
                 <div class="hero__content">
                     <h1 id="hero-heading">Property <span><span class="typewriter" data-text="Fund"
-                                aria-label="Fund"></span></span> in Dubai DIFC</h1>
-                    <a href="#contacts-heading" class="hero__cta">Get in Touch</a>
+                                aria-label="Fund"></span></span> in Dubai DIFC <a href="#contacts-heading" class="hero__cta">Get in Touch</a></h1>
+                    
                 </div>
                 <dl class="hero__stats" aria-hidden="true">
                     <div class="hero__stats-item">
@@ -132,7 +132,7 @@
         <section class="who-we-are" aria-labelledby="who-we-are-heading">
             <div class="who-we-are__content">
                 <div class="container">
-                    <h2 id="who-we-are-heading">Who we are</h2>
+                    <h2 id="who-we-are-heading" data-aos="fade-up" data-aos-anchor-placement="top-center">Who we are</h2>
                     <div class="who-we-are__text">
                         <p>WealthGuard is a Dubai-based investment and management ecosystem, operating across food &amp;
                             beverage, finance, and commercial real estate, with a core focus on income-generating assets
@@ -167,7 +167,7 @@
                         <ul class="founder__partners" aria-label="Our partners">
                             <li class="founder__partner">
 
-                                <a href="" target="_blank">
+                                <a href="/" target="_blank">
                                     <img src="assets/images/who-we-are__list1.png" width="103" height="26"
                                         loading="lazy" alt="Partner logo 1">
                                 </a>
@@ -262,25 +262,25 @@
                 </div>
                 <div class="business-model__body">
                     <div class="business-model__body-col">
-                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="0">
+                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="0" data-aos-anchor-placement="top-center">
                             <span aria-hidden="true">01</span>
                             <h3>Long lease plot</h3>
                         </article>
-                        <article class="business-model__body-article business-model__body-article--style2" data-aos="fade-up" data-aos-delay="150">
+                        <article class="business-model__body-article business-model__body-article--style2" data-aos="fade-up" data-aos-delay="150" data-aos-anchor-placement="top-center">
                             <span aria-hidden="true">02</span>
                             <h3>Build smart retail spaces</h3>
                         </article>
-                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="300">
+                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="300" data-aos-anchor-placement="top-center">
                             <span aria-hidden="true">03</span>
                             <h3>Leasing</h3>
                         </article>
                     </div>
                     <div class="business-model__body-col business-model__body-col--secondary">
-                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="450">
+                        <article class="business-model__body-article business-model__body-article--style1" data-aos="fade-up" data-aos-delay="450" data-aos-anchor-placement="top-center">
                             <span aria-hidden="true">04</span>
                             <h3>Exit strategy</h3>
                         </article>
-                        <article class="business-model__body-article business-model__body-article--style3" data-aos="fade-up" data-aos-delay="600">
+                        <article class="business-model__body-article business-model__body-article--style3" data-aos="fade-up" data-aos-delay="600" data-aos-anchor-placement="top-center">
                             <span aria-hidden="true">05</span>
                             <h3>Make it again</h3>
                         </article>
@@ -344,24 +344,14 @@
             <div class="container">
                 <h2 id="case-study-heading" class="visually-hidden">Project under go</h2>
 
-                <!-- Main Slider -->
-                <div class="case-study__slider swiper" aria-label="Case study images">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide case-study__slide">
-                            <img src="assets/images/case-study1.jpg" width="800" height="500" loading="lazy"
-                                alt="Case study project view 1">
-                        </div>
-                        <div class="swiper-slide case-study__slide">
-                            <img src="assets/images/case-study1.jpg" width="800" height="500" loading="lazy"
-                                alt="Case study project view 2">
-                        </div>
-                        <div class="swiper-slide case-study__slide">
-                            <img src="assets/images/case-study1.jpg" width="800" height="500" loading="lazy"
-                                alt="Case study project view 3">
-                        </div>
+                <!-- Main image (static) -->
+                <div class="case-study__slider" aria-label="Case study image">
+                    <div class="case-study__slide">
+                        <img src="assets/images/case-study1.jpg" width="800" height="500" loading="lazy"
+                            alt="Case study project view">
                     </div>
 
-                    <!-- Thumbnail / Breadcrumb Slider -->
+                    <!-- Thumbnail slider -->
                     <div class="case-study__thumbs swiper" aria-label="Case study thumbnails">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide case-study__thumb">
@@ -377,12 +367,10 @@
                     </div>
 
                     <div class="case-study__slider-nav" aria-hidden="true">
-                        <button class="case-study__slider-prev swiper-button-prev" type="button"
-                            aria-label="Previous slide">
+                        <button class="case-study__slider-prev" type="button" aria-label="Previous thumbnail">
                             <img src="assets/images/prev.svg" width="16" height="27" alt="">
                         </button>
-                        <button class="case-study__slider-next swiper-button-next" type="button"
-                            aria-label="Next slide">
+                        <button class="case-study__slider-next" type="button" aria-label="Next thumbnail">
                             <img src="assets/images/next.svg" width="16" height="27" alt="">
                         </button>
                     </div>
@@ -837,7 +825,7 @@
             <div class="container">
                 <h2 id="process-heading">Process</h2>
                 <ol class="process__list" aria-label="Investment process steps">
-                    <li class="process__item" data-aos="fade-right" data-aos-delay="0">
+                    <li class="process__item" data-aos="fade-up" data-aos-delay="0" data-aos-anchor-placement="top-center">
                         <div class="process__item-content">
                             <span class="process__item-number" aria-hidden="true">01</span>
                             <h3 class="process__item-title">Request deck</h3>
@@ -845,7 +833,7 @@
                         <img class="process__item-arrow" src="assets/images/right.svg" width="24" height="41"
                             loading="lazy" alt="" aria-hidden="true">
                     </li>
-                    <li class="process__item" data-aos="fade-right" data-aos-delay="80">
+                    <li class="process__item" data-aos="fade-up" data-aos-delay="80" data-aos-anchor-placement="top-center">
                         <div class="process__item-content">
                             <span class="process__item-number" aria-hidden="true">02</span>
                             <h3 class="process__item-title">Call</h3>
@@ -853,7 +841,7 @@
                         <img class="process__item-arrow" src="assets/images/right.svg" width="24" height="41"
                             loading="lazy" alt="" aria-hidden="true">
                     </li>
-                    <li class="process__item" data-aos="fade-right" data-aos-delay="160">
+                    <li class="process__item" data-aos="fade-up" data-aos-delay="160" data-aos-anchor-placement="top-center">
                         <div class="process__item-content">
                             <span class="process__item-number" aria-hidden="true">03</span>
                             <h3 class="process__item-title">Subscription</h3>
@@ -861,7 +849,7 @@
                         <img class="process__item-arrow" src="assets/images/right.svg" width="24" height="41"
                             loading="lazy" alt="" aria-hidden="true">
                     </li>
-                    <li class="process__item" data-aos="fade-right" data-aos-delay="240">
+                    <li class="process__item" data-aos="fade-up" data-aos-delay="240" data-aos-anchor-placement="top-center">
                         <div class="process__item-content">
                             <span class="process__item-number" aria-hidden="true">04</span>
                             <h3 class="process__item-title">Investment</h3>
@@ -882,27 +870,30 @@
                 </div>
                 <div class="contacts__form">
                     <h3>Let's get in Touch</h3>
-                    <form action="#" method="post" novalidate>
+                    <form id="contacts-form" action="send.php" method="post">
                         <div class="contacts__form-fields">
                             <div class="contacts__form-fields-row">
                                 <div class="contacts__form-field">
                                     <input type="text" id="name" name="name" placeholder="Name" autocomplete="name"
-                                        required>
+                                        required minlength="2" maxlength="100">
                                 </div>
                                 <div class="contacts__form-field">
                                     <input type="text" id="job-title" name="job-title" placeholder="Job title"
-                                        autocomplete="organization-title">
+                                        autocomplete="organization-title" required minlength="2" maxlength="100">
                                 </div>
                             </div>
                             <div class="contacts__form-fields-row2">
                                 <div class="contacts__form-field">
                                     <input type="tel" id="phone" name="phone" placeholder="Phone number"
-                                        autocomplete="tel">
+                                        autocomplete="tel" required pattern="[0-9+\-\s()]{6,20}">
                                 </div>
                                 <div class="contacts__form-field">
-                                    <input type="url" id="social-link" name="social-link" placeholder="Link on social">
+                                    <input type="url" id="social-link" name="social-link" placeholder="Link on social" required>
                                 </div>
                             </div>
+                            <!-- honeypot anti-spam: must stay empty -->
+                            <input type="text" name="website" tabindex="-1" autocomplete="off"
+                                style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
                         </div>
                         <button class="contacts__form-btn" type="submit">Get in Touch</button>
                     </form>
@@ -920,9 +911,7 @@
             <div class="footer__top">
                 <div class="footer__nav">
                     <a href="#hero-heading" class="footer__logo" aria-label="Crystal Planet — go to homepage">
-                        <img src="assets/images/logo1.svg" width="115" height="72" alt="Crystal Planet">
-                        <img src="assets/images/logo2.svg" width="17" height="17" alt="" aria-hidden="true">
-                        <img src="assets/images/logo3.svg" width="116" height="17" alt="" aria-hidden="true">
+                        <img src="assets/images/Logos.svg" width="268" height="72" alt="Crystal Planet">
                     </a>
                     <nav class="footer__nav-links" aria-label="Footer navigation">
                         <div class="footer__nav-group">

@@ -38,65 +38,76 @@
 	});
 })();
 
-// ─── Commitment Horizontal Scroll ──────────────────────────────────────────────
+// ─── Commitment Horizontal Scroll (GSAP ScrollTrigger) ────────────────────
 
-(function () {
-	const wrapper = document.querySelector('.commitment__sticky-wrapper');
+window.addEventListener('load', () => {
+	const section = document.querySelector('.commitment');
 	const track = document.querySelector('.commitment__track');
 	const body = document.querySelector('.commitment__body');
 
-	if (!wrapper || !track || !body) return;
+	if (!section || !track || !body || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-	const MOBILE_BREAKPOINT = 1280;
-	let totalScroll = 0;
-	let wrapperTop = 0;
-	let isMobile = false;
+	gsap.registerPlugin(ScrollTrigger);
 
-	function setup() {
-		isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-		if (isMobile) {
-			wrapper.style.height = '';
-			body.style.transform = '';
-			return;
+	// iOS Safari fix — normalize touch scroll behavior
+	ScrollTrigger.normalizeScroll(true);
+	ScrollTrigger.config({ ignoreMobileResize: true });
+
+	const isTouch = ScrollTrigger.isTouch === 1;
+
+	// Lenis ↔ ScrollTrigger sync (only when Lenis is active — desktop/non-Safari)
+	if (typeof lenis !== 'undefined' && lenis) {
+		lenis.on('scroll', ScrollTrigger.update);
+		gsap.ticker.add((time) => lenis.raf(time * 1000));
+		gsap.ticker.lagSmoothing(0);
+	}
+
+	const getScrollAmount = () => Math.max(0, body.scrollWidth - track.clientWidth);
+
+	gsap.to(body, {
+		x: () => -getScrollAmount(),
+		ease: 'none',
+		scrollTrigger: {
+			trigger: section,
+			start: 'top top',
+			end: () => '+=' + getScrollAmount(),
+			pin: true,
+			pinType: isTouch ? 'fixed' : 'transform',
+			scrub: 1,
+			invalidateOnRefresh: true,
+			anticipatePin: 1,
+		},
+	});
+
+	// Refresh after AOS / images load
+	setTimeout(() => ScrollTrigger.refresh(), 200);
+	window.addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+});
+
+// ─── Team AOS (desktop only) ─────────────────────────────────────────────
+
+(function () {
+	function applyTeamAOS() {
+		const members = document.querySelectorAll('.team__member');
+		if (window.innerWidth >= 1280) {
+			members.forEach((el) => {
+				el.setAttribute('data-aos', 'fade-up');
+				el.setAttribute('data-aos-duration', '500');
+				el.setAttribute('data-aos-anchor-placement', 'top-center');
+			});
+		} else {
+			members.forEach((el) => {
+				el.removeAttribute('data-aos');
+				el.removeAttribute('data-aos-duration');
+				el.removeAttribute('data-aos-anchor-placement');
+			});
 		}
-
-		wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
-		totalScroll = body.scrollWidth - track.clientWidth;
-		const sticky = wrapper.querySelector('.commitment__sticky');
-		const stickyHeight = sticky ? sticky.offsetHeight : window.innerHeight;
-		wrapper.style.height = (stickyHeight + totalScroll) + 'px';
+		if (typeof AOS !== 'undefined') AOS.refreshHard();
 	}
 
-	function onScroll(scrollY) {
-		if (isMobile) return;
-		const scrolled = scrollY - wrapperTop;
-		const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
-		body.style.transform = `translateX(${-progress * totalScroll}px)`;
-	}
-
-	// Native scroll fallback
-	window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
-	window.addEventListener('resize', () => { setup(); onScroll(window.scrollY); });
-
-	function init() {
-		setup();
-		onScroll(window.scrollY);
-
-		// Hook into Lenis if available (initialized after this block)
-		requestAnimationFrame(function hookLenis() {
-			if (typeof lenis !== 'undefined' && lenis) {
-				lenis.on('scroll', ({ scroll }) => onScroll(scroll));
-			} else {
-				requestAnimationFrame(hookLenis);
-			}
-		});
-	}
-
-	if (document.readyState === 'complete') {
-		setTimeout(init, 150);
-	} else {
-		window.addEventListener('load', () => setTimeout(init, 150));
-	}
+	document.addEventListener('DOMContentLoaded', applyTeamAOS);
+	window.addEventListener('load', applyTeamAOS);
+	window.addEventListener('resize', applyTeamAOS);
 })();
 
 // ─── AOS Init ─────────────────────────────────────────────────────────────────
@@ -283,24 +294,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	window.addEventListener('resize', initTeamSlider);
 });
-// ─── Case Study Slider ──────────────────────────────────────────────────────
+// ─── Case Study Thumbs Slider ───────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-	const thumbsSwiper = new Swiper('.case-study__thumbs', {
+	if (!document.querySelector('.case-study__thumbs')) return;
+	new Swiper('.case-study__thumbs', {
 		slidesPerView: 'auto',
 		spaceBetween: 10,
-		watchSlidesProgress: true,
-	});
-
-	new Swiper('.case-study__slider', {
-		loop: true,
-		spaceBetween: 0,
+		freeMode: true,
+		grabCursor: true,
 		navigation: {
 			nextEl: '.case-study__slider-next',
 			prevEl: '.case-study__slider-prev',
-		},
-		thumbs: {
-			swiper: thumbsSwiper,
 		},
 	});
 });
@@ -357,3 +362,18 @@ if (!isSafari) {
 		el.addEventListener("mouseleave", () => lenis.start());
 	});
 }
+
+// ─── Contact Form — disable button on submit ────────────────────────────────
+
+(function () {
+	const form = document.getElementById('contacts-form');
+	if (!form) return;
+
+	form.addEventListener('submit', () => {
+		const btn = form.querySelector('.contacts__form-btn');
+		if (btn) {
+			btn.disabled = true;
+			btn.textContent = 'Sending...';
+		}
+	});
+})();
